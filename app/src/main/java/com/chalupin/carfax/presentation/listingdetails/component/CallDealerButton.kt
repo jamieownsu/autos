@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -18,11 +19,14 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.chalupin.carfax.R
+import com.chalupin.carfax.presentation.listingdetails.ui.ListingDetailScreen
 
 @Composable
 fun CallDealerButton(phoneNumber: String, isDetailsScreen: Boolean = false) {
@@ -104,5 +108,16 @@ fun makePhoneCall(context: android.content.Context, phoneNumber: String) {
         Toast.makeText(context, "Permission error: ${e.message}", Toast.LENGTH_LONG).show()
     } catch (e: Exception) {
         Toast.makeText(context, "Failed to initiate call: ${e.message}", Toast.LENGTH_LONG).show()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewCallDealerButton() {
+    MaterialTheme {
+        CallDealerButton(
+            "555-555-5555",
+            false
+        )
     }
 }

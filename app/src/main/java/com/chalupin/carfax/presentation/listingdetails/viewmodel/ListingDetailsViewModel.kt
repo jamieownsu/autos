@@ -1,5 +1,6 @@
 package com.chalupin.carfax.presentation.listingdetails.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chalupin.carfax.domain.model.Listing
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListingDetailViewModel @Inject constructor(
-    private val getListingDetailsUseCase: GetListingDetailsUseCase
+    private val getListingDetailsUseCase: GetListingDetailsUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _listingDetails = MutableStateFlow<Listing?>(null)
@@ -27,20 +29,28 @@ class ListingDetailViewModel @Inject constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
 
-    fun fetchListingDetails(vin: String) {
+    val vin = savedStateHandle.get<String>("listing_vin")
+
+    init {
+        vin?.let {
+            fetchListingDetails(vin = it)
+        } ?: run {
+            _error.value = "VIN not provided."
+        }
+    }
+
+    private fun fetchListingDetails(vin: String) {
         if (_listingDetails.value?.vin == vin && !isLoading.value) {
             return
         }
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
-            getListingDetailsUseCase(vin)
-                .catch { e ->
+            getListingDetailsUseCase(vin).catch { e ->
                     _error.value = "Failed to load details: ${e.message}"
                     _isLoading.value = false
                     _listingDetails.value = null
-                }
-                .collectLatest { result ->
+                }.collectLatest { result ->
                     when (result) {
                         is ListingDetailsState.Loading -> {
                             _isLoading.value = true

@@ -21,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -36,8 +37,6 @@ fun ListingDetailScreen(
     viewModel: ListingDetailViewModel = hiltViewModel(),
     vin: String,
 ) {
-    viewModel.fetchListingDetails(vin)
-
     val listingDetails by viewModel.listingDetails.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val error by viewModel.error.collectAsState()
@@ -212,21 +211,3 @@ fun ListingDetailScreen(
         }
     }
 }
-
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Composable
-//fun ListingDetailsAppBar(listingDetails: Listing?, navController: NavHostController) {
-//    TopAppBar(
-//        title = {},
-////      backgroundColor = MaterialTheme.colors.primaryVariant,
-////      contentColor = MaterialTheme.colors.onPrimary,
-//        navigationIcon = {
-//            IconButton(onClick = { navController.popBackStack() }) {
-//                Icon(
-//                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-//                    contentDescription = "Back"
-//                )
-//            }
-//        }
-//    )
-//}

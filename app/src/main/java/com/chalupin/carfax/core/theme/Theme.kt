@@ -12,13 +12,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
+    primary = Color(0xFF336699),
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Color.Red,
+    primary = Color(0xFF336699),
     secondary = PurpleGrey40,
     tertiary = Pink40,
 //    background = Color(0xFFFFFBFE),
@@ -34,7 +34,7 @@ private val LightColorScheme = lightColorScheme(
 fun CarFaxTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
