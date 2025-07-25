@@ -1,4 +1,4 @@
-package com.chalupin.carfax.presentation.listingdetails.component
+package com.chalupin.carfax.presentation.shared
 
 import android.Manifest
 import android.content.Intent
@@ -24,9 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.chalupin.carfax.R
-import com.chalupin.carfax.presentation.listingdetails.ui.ListingDetailScreen
 
 @Composable
 fun CallDealerButton(phoneNumber: String, isDetailsScreen: Boolean = false) {

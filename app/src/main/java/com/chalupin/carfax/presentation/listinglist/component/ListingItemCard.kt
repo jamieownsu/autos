@@ -27,7 +27,7 @@ import com.chalupin.carfax.core.util.formatPrice
 import com.chalupin.carfax.domain.model.Dealer
 import com.chalupin.carfax.domain.model.Images
 import com.chalupin.carfax.domain.model.Listing
-import com.chalupin.carfax.presentation.listingdetails.component.CallDealerButton
+import com.chalupin.carfax.presentation.shared.CallDealerButton
 
 @Composable
 fun ListingItemCard(listing: Listing, onItemClick: (String) -> Unit) {

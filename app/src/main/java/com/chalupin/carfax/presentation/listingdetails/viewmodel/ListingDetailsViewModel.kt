@@ -47,28 +47,28 @@ class ListingDetailViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             getListingDetailsUseCase(vin).catch { e ->
-                    _error.value = "Failed to load details: ${e.message}"
-                    _isLoading.value = false
-                    _listingDetails.value = null
-                }.collectLatest { result ->
-                    when (result) {
-                        is ListingDetailsState.Loading -> {
-                            _isLoading.value = true
-                            _error.value = null
-                        }
+                _error.value = "Failed to load details: ${e.message}"
+                _isLoading.value = false
+                _listingDetails.value = null
+            }.collectLatest { result ->
+                when (result) {
+                    is ListingDetailsState.Loading -> {
+                        _isLoading.value = true
+                        _error.value = null
+                    }
 
-                        is ListingDetailsState.Success -> {
-                            _isLoading.value = false
-                            _error.value = null
-                            _listingDetails.value = result.data
-                        }
+                    is ListingDetailsState.Success -> {
+                        _isLoading.value = false
+                        _error.value = null
+                        _listingDetails.value = result.data
+                    }
 
-                        is ListingDetailsState.Error -> {
-                            _isLoading.value = false
-                            _error.value = result.message
-                        }
+                    is ListingDetailsState.Error -> {
+                        _isLoading.value = false
+                        _error.value = result.message
                     }
                 }
+            }
         }
     }
 }
