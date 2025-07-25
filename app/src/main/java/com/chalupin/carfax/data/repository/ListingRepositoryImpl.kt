@@ -2,11 +2,12 @@ package com.chalupin.carfax.data.repository
 
 import com.chalupin.carfax.data.api.ListingService
 import com.chalupin.carfax.data.db.dao.ListingDao
+import com.chalupin.carfax.data.mapper.toDomainList
 import com.chalupin.carfax.data.mapper.toDomainListFromEntity
 import com.chalupin.carfax.data.mapper.toEntity
+import com.chalupin.carfax.data.util.AppError
 import com.chalupin.carfax.domain.model.Listing
 import com.chalupin.carfax.domain.repository.ListingRepository
-import com.chalupin.carfax.data.util.AppError
 import com.chalupin.carfax.presentation.listingdetails.util.ListingDetailsState
 import com.chalupin.carfax.presentation.listinglist.util.ListingsState
 import kotlinx.coroutines.flow.Flow
@@ -26,12 +27,12 @@ class ListingRepositoryImpl @Inject constructor(
             emit(ListingsState.Loading())
             val carFaxDto = listingService.getListings()
             val listingDtos = carFaxDto.listings
-            listingDao.insertListings(listingDtos.map { it.toEntity() })
             emit(
                 ListingsState.Success(
-                    data = listingDao.getAllListings().map { it.toDomainListFromEntity() }.first()
+                    data = listingDtos.toDomainList()
                 )
             )
+            listingDao.insertListings(listingDtos.map { it.toEntity() })
         } catch (e: IOException) {
             emit(
                 ListingsState.Offline(

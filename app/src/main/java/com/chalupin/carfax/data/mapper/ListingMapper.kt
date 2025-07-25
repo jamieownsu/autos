@@ -1,6 +1,7 @@
 package com.chalupin.carfax.data.mapper
 
 import com.chalupin.carfax.data.api.model.DealerDto
+import com.chalupin.carfax.data.api.model.ImagesDto
 import com.chalupin.carfax.data.api.model.ListingDto
 import com.chalupin.carfax.data.db.entity.DealerEntity
 import com.chalupin.carfax.data.db.entity.ListingEntity
@@ -8,11 +9,44 @@ import com.chalupin.carfax.domain.model.Dealer
 import com.chalupin.carfax.domain.model.Images
 import com.chalupin.carfax.domain.model.Listing
 
+fun DealerDto.toDomain(): Dealer {
+    return Dealer(
+        city = this.city, state = this.state, phone = this.phone
+    )
+}
+
+fun ImagesDto.toDomain(): Images {
+    return Images(large = this.large)
+}
+
+fun ListingDto.toDomain(): Listing {
+    return Listing(
+        dealer = this.dealer.toDomain(),
+        vin = this.vin,
+        year = this.year,
+        make = this.make,
+        model = this.model,
+        mileage = this.mileage,
+        currentPrice = this.currentPrice,
+        imageCount = this.imageCount,
+        images = this.images?.toDomain(),
+        exteriorColor = this.exteriorColor,
+        interiorColor = this.interiorColor,
+        engine = this.engine,
+        driveType = this.driveType,
+        transmission = this.transmission,
+        fuel = this.fuel,
+        bodyType = this.bodyType
+    )
+}
+
+fun List<ListingDto>.toDomainList(): List<Listing> {
+    return map { it.toDomain() }
+}
+
 fun DealerDto.toEntity(): DealerEntity {
     return DealerEntity(
-        city = this.city,
-        state = this.state,
-        phone = this.phone
+        city = this.city, state = this.state, phone = this.phone
     )
 }
 
@@ -39,9 +73,7 @@ fun ListingDto.toEntity(): ListingEntity {
 
 fun DealerEntity.toDomain(): Dealer {
     return Dealer(
-        city = this.city,
-        state = this.state,
-        phone = this.phone
+        city = this.city, state = this.state, phone = this.phone
     )
 }
 
