@@ -2,7 +2,6 @@ package com.chalupin.carfax.presentation.listingdetails.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,7 +21,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.chalupin.carfax.R
 import com.chalupin.carfax.core.util.formatMileage
@@ -83,98 +81,7 @@ fun ListingDetailsColumn(listing: Listing) {
             thickness = 1.dp,
             color = Color.LightGray
         )
-        Column(
-            modifier = Modifier.padding(horizontal = 32.dp),
-        ) {
-            Text(
-                modifier = Modifier.padding(bottom = 32.dp),
-                text = stringResource(
-                    id = R.string.vehicle_info,
-                ),
-                style = MaterialTheme.typography.titleMedium,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(0.75f),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column {
-                    Text(
-                        stringResource(id = R.string.location),
-                        color = Color.Gray,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        stringResource(id = R.string.exterior_color), color = Color.Gray,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        stringResource(id = R.string.interior_color), color = Color.Gray,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        stringResource(id = R.string.drive_type), color = Color.Gray,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        stringResource(id = R.string.transmission), color = Color.Gray,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        stringResource(id = R.string.body_style), color = Color.Gray,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        stringResource(id = R.string.engine), color = Color.Gray,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        stringResource(id = R.string.fuel), color = Color.Gray,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                }
-                Column {
-                    Text(
-                        stringResource(
-                            id = R.string.city_state,
-                            listing.dealer.city,
-                            listing.dealer.state
-                        ),
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        listing.exteriorColor,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        listing.interiorColor,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        listing.driveType,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        listing.transmission,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        listing.bodyType,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        listing.engine,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        listing.fuel,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                }
-            }
-        }
+        VehicleDetailsRow(listing)
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 32.dp),
             thickness = 2.dp,
