@@ -10,10 +10,11 @@
     <string name="body_style">Body Style</string>
     <string name="engine">Engine</string>
     <string name="fuel">Fuel</string>
-    <string name="no_data_error">Network/Offline listings data unavailable!</string>
     <string name="year_make_model">%s %s %s</string>
     <string name="city_state">%s, %s</string>
     <string name="price_mileage">%s | %s mi</string>
-    <string name="ok">OK</string>
-    <string name="perm_rationale">CarFax needs your permission to make phone calls</string>
+    <string name="call_perm_denied">Phone call permission denied. Cannot make call.</string>
+    <string name="no_call_app">No app found to make a phone call</string>
+    <string name="call_failed">Failed to initiate call: %s</string>
+    <string name="something_went_wrong">Something went wrong!</string>
 </resources>

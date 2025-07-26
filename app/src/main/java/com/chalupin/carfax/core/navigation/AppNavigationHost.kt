@@ -32,14 +32,10 @@ fun AppNavigationHost(navController: NavHostController) {
             arguments = listOf(navArgument(NavRoutes.LISTING_VIN_ARG) {
                 type = NavType.StringType
             })
-        ) { backStackEntry ->
-            val vin = backStackEntry.arguments?.getString(NavRoutes.LISTING_VIN_ARG)
-            vin?.let {
-                ListingDetailScreen(
-                    viewModel = hiltViewModel(),
-                    vin = it
-                )
-            }
+        ) {
+            ListingDetailScreen(
+                viewModel = hiltViewModel(),
+            )
         }
     }
 }

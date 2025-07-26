@@ -1,5 +1,6 @@
 package com.chalupin.carfax.presentation.listingdetails.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -36,13 +37,11 @@ class ListingDetailViewModel @Inject constructor(
             fetchListingDetails(vin = it)
         } ?: run {
             _error.value = "VIN not provided."
+            Log.e("ListingDetailViewModel", _error.value, Exception())
         }
     }
 
     private fun fetchListingDetails(vin: String) {
-        if (_listingDetails.value?.vin == vin && !isLoading.value) {
-            return
-        }
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
@@ -50,6 +49,7 @@ class ListingDetailViewModel @Inject constructor(
                 _error.value = "Failed to load details: ${e.message}"
                 _isLoading.value = false
                 _listingDetails.value = null
+                Log.e("ListingDetailViewModel", _error.value, e)
             }.collectLatest { result ->
                 when (result) {
                     is ListingDetailsState.Loading -> {

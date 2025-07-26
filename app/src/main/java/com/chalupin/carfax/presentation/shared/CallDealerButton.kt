@@ -3,6 +3,7 @@ package com.chalupin.carfax.presentation.shared
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,7 +38,7 @@ fun CallDealerButton(phoneNumber: String, isDetailsScreen: Boolean = false) {
         } else {
             Toast.makeText(
                 context,
-                "CALL_PHONE permission denied. Cannot make call.",
+                context.getString(R.string.call_perm_denied),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -100,12 +101,20 @@ fun makePhoneCall(context: android.content.Context, phoneNumber: String) {
         if (intent.resolveActivity(context.packageManager) != null) {
             context.startActivity(intent)
         } else {
-            Toast.makeText(context, "No app found to make a phone call.", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, context.getString(R.string.no_call_app), Toast.LENGTH_LONG)
+                .show()
         }
-    } catch (e: SecurityException) {
-        Toast.makeText(context, "Permission error: ${e.message}", Toast.LENGTH_LONG).show()
     } catch (e: Exception) {
-        Toast.makeText(context, "Failed to initiate call: ${e.message}", Toast.LENGTH_LONG).show()
+        if (e is SecurityException) {
+            Log.e("CallDealerButton", "Permission error: ${e.message}", e)
+        } else {
+            Log.e("CallDealerButton", "Call failed: ${e.message}", e)
+        }
+        Toast.makeText(
+            context,
+            context.getString(R.string.call_failed, e.message),
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
 

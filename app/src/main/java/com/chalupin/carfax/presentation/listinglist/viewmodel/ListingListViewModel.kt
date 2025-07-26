@@ -1,5 +1,6 @@
 package com.chalupin.carfax.presentation.listinglist.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chalupin.carfax.domain.model.Listing
@@ -39,6 +40,7 @@ class ListingListViewModel @Inject constructor(
                 .catch { e ->
                     _error.value = "Failed to load listings: ${e.message}"
                     _isLoading.value = false
+                    Log.e("ListingListViewModel", _error.value, e)
                 }
                 .collectLatest { result ->
                     when (result) {
