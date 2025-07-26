@@ -48,34 +48,26 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.activity.ktx)
 
-    // Coil for image loading in Compose
     implementation(libs.coil.compose)
 
-    // Retrofit for networking
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
-    // Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-    // Dagger Hilt (Dependency Injection)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    // Hilt extensions for AndroidX
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.androidx.hilt.compiler)
 
-    implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.room.compiler) // For Java/Groovy projects
-    ksp(libs.androidx.room.room.compiler) // For Kotlin projects using KSP (Recommended)
-
-    // Kotlin Extensions for Room (Coroutines support, Flow integration)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.room.compiler)
+    ksp(libs.androidx.room.room.compiler)
 
-    // Jetpack Compose Navigation
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.core.ktx)

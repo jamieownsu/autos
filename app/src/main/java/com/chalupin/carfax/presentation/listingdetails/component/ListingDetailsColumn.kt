@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,19 +34,25 @@ import com.chalupin.carfax.presentation.shared.CallDealerButton
 
 @Composable
 fun ListingDetailsColumn(listing: Listing) {
+    val imageCount = listing.images?.large?.size ?: 1
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { imageCount })
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        AsyncImage(
-            model = listing.getCoverImage(),
-            contentDescription = "Image of ${listing.make} ${listing.model}",
-            modifier = Modifier
-                .fillMaxWidth()
-                .size(300.dp),
-            contentScale = ContentScale.Crop,
-            placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
-            error = painterResource(R.drawable.ic_launcher_foreground),
-        )
+        HorizontalPager(
+            state = pagerState,
+        ) { page ->
+            AsyncImage(
+                model = listing.getImages()?.get(page),
+                contentDescription = "Image of ${listing.make} ${listing.model}",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .size(300.dp),
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
+                error = painterResource(R.drawable.ic_launcher_foreground),
+            )
+        }
         Column(
             modifier = Modifier.padding(horizontal = 32.dp, vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)

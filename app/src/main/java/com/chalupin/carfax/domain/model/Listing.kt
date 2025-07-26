@@ -24,5 +24,12 @@ data class Listing(
         }
         return null
     }
+
+    fun getImages(): List<String>? {
+        if (images?.large?.isNotEmpty() == true) {
+            return images.large
+        }
+        return null
+    }
 }
 
