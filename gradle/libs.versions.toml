@@ -36,6 +36,8 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltCompiler" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltCompiler" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltCompiler" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
