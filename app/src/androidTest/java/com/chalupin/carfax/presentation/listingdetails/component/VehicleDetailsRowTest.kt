@@ -51,11 +51,9 @@ class VehicleDetailsRowTest {
             }
         }
 
-        // Assert that the "Vehicle Info" title is displayed
         composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.vehicle_info))
             .assertIsDisplayed()
 
-        // Assert that all static labels are displayed
         composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.location))
             .assertIsDisplayed()
         composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.exterior_color))
@@ -73,7 +71,6 @@ class VehicleDetailsRowTest {
         composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.fuel))
             .assertIsDisplayed()
 
-        // Assert that all dynamic values from the listing are displayed
         composeTestRule.onNodeWithText(
             composeTestRule.activity.getString(
                 R.string.city_state,

@@ -30,7 +30,7 @@ abstract class ListingDatabase : RoomDatabase() {
                         ListingDatabase::class.java,
                         "carfax_listing_database"
                     )
-                        .fallbackToDestructiveMigration()
+                        .fallbackToDestructiveMigration(false)
                         .build()
                     INSTANCE = instance
                     instance
