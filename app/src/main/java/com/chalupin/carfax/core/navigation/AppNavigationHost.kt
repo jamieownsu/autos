@@ -1,3 +1,5 @@
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -19,7 +21,7 @@ object NavRoutes {
 fun AppNavigationHost(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = NavRoutes.LISTING_LIST
+        startDestination = NavRoutes.LISTING_LIST,
     ) {
         composable(NavRoutes.LISTING_LIST) {
             ListingListScreen(
@@ -31,7 +33,19 @@ fun AppNavigationHost(navController: NavHostController) {
             route = "${NavRoutes.LISTING_DETAIL}/{${NavRoutes.LISTING_VIN_ARG}}",
             arguments = listOf(navArgument(NavRoutes.LISTING_VIN_ARG) {
                 type = NavType.StringType
-            })
+            }),
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(durationMillis = 400)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Down,
+                    animationSpec = tween(600)
+                )
+            },
         ) {
             ListingDetailScreen(
                 viewModel = hiltViewModel(),
