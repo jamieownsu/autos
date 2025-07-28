@@ -44,7 +44,6 @@ class ListingRepositoryImpl @Inject constructor(
             emit(
                 ListingsState.Error(
                     message = AppError.ApiError(e.code(), errorMessage).message!!,
-//                    data = listingDao.getAllListings().map { it.toDomainListFromEntity() }.first()
                 )
             )
         } catch (e: Exception) {
@@ -53,7 +52,6 @@ class ListingRepositoryImpl @Inject constructor(
                     message = AppError.UnknownError(
                         e.localizedMessage ?: "An unexpected error occurred"
                     ).message!!,
-//                    data = listingDao.getAllListings().map { it.toDomainListFromEntity() }.first()
                 )
             )
         }
