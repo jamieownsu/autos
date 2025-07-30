@@ -14,4 +14,7 @@ interface ListingDao {
 
     @Query("SELECT * FROM listings")
     fun getAllListings(): Flow<List<ListingEntity>>
+
+    @Query("DELETE FROM listings")
+    suspend fun deleteAllListings()
 }

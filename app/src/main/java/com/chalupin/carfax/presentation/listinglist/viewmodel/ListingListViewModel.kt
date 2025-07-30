@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chalupin.carfax.domain.model.Listing
 import com.chalupin.carfax.domain.usecase.GetListingsUseCase
+import com.chalupin.carfax.presentation.listinglist.util.ListingsEvent
 import com.chalupin.carfax.presentation.listinglist.util.ListingsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,46 +29,54 @@ class ListingListViewModel @Inject constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
 
+    private val _isOffline = MutableStateFlow(false)
+    val isOffline: StateFlow<Boolean> = _isOffline
+
     init {
-        fetchListings()
+        handleEvent(ListingsEvent.LoadListingsEvent)
+    }
+
+    fun handleEvent(event: ListingsEvent) {
+        when (event) {
+            ListingsEvent.LoadListingsEvent -> fetchListings()
+        }
     }
 
     private fun fetchListings() {
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
-            getListingsUseCase()
-                .catch { e ->
-                    _error.value = "Failed to load listings: ${e.message}"
-                    _isLoading.value = false
-                    Log.e("ListingListViewModel", _error.value, e)
-                }
-                .collectLatest { result ->
-                    when (result) {
-                        is ListingsState.Loading -> {
-                            _isLoading.value = true
-                            _error.value = null
-                        }
+            _isOffline.value = false
+            getListingsUseCase().catch { e ->
+                _error.value = "Failed to load listings: ${e.message}"
+                _isLoading.value = false
+                _isOffline.value = false
+                Log.e("ListingListViewModel", _error.value, e)
+            }.collectLatest { result ->
+                when (result) {
+                    is ListingsState.Loading -> {
+                        _isLoading.value = true
+                        _error.value = null
+                    }
 
-                        is ListingsState.Success -> {
-                            _isLoading.value = false
-                            _error.value = null
-                            _listings.value = result.data ?: emptyList()
-                        }
+                    is ListingsState.Success -> {
+                        _isLoading.value = false
+                        _error.value = null
+                        _listings.value = result.data ?: emptyList()
+                    }
 
-                        is ListingsState.Error -> {
-                            _isLoading.value = false
-                            _error.value = result.message
-                        }
+                    is ListingsState.Error -> {
+                        _isLoading.value = false
+                        _error.value = result.message
+                    }
 
-                        is ListingsState.Offline -> {
-                            _isLoading.value = false
-                            result.data?.let {
-                                _listings.value = it
-                            }
-                        }
+                    is ListingsState.Offline -> {
+                        _isLoading.value = false
+                        _isOffline.value = true
+                        _listings.value = result.data ?: emptyList()
                     }
                 }
+            }
         }
     }
 }

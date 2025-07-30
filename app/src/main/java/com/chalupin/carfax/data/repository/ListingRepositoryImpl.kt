@@ -32,6 +32,7 @@ class ListingRepositoryImpl @Inject constructor(
                     data = listingDtos.toDomainList()
                 )
             )
+            listingDao.deleteAllListings()
             listingDao.insertListings(listingDtos.map { it.toEntity() })
         } catch (e: IOException) {
             emit(

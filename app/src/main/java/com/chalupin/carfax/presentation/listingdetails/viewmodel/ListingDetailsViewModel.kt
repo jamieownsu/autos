@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chalupin.carfax.domain.model.Listing
 import com.chalupin.carfax.domain.usecase.GetListingDetailsUseCase
+import com.chalupin.carfax.presentation.listingdetails.util.ListingDetailsEvent
 import com.chalupin.carfax.presentation.listingdetails.util.ListingDetailsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,10 +35,16 @@ class ListingDetailViewModel @Inject constructor(
 
     init {
         vin?.let {
-            fetchListingDetails(vin = it)
+            handleEvent(ListingDetailsEvent.LoadListingDetailsEvent(vin = it))
         } ?: run {
             _error.value = "VIN not provided."
             Log.e("ListingDetailViewModel", _error.value, Exception())
+        }
+    }
+
+    private fun handleEvent(event: ListingDetailsEvent) {
+        when (event) {
+            is ListingDetailsEvent.LoadListingDetailsEvent -> fetchListingDetails(event.vin)
         }
     }
 

@@ -1,6 +1,7 @@
 package com.chalupin.carfax.presentation.shared
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.util.Log
@@ -93,7 +94,7 @@ fun CallDealerButton(phoneNumber: String, isDetailsScreen: Boolean = false) {
     }
 }
 
-fun makePhoneCall(context: android.content.Context, phoneNumber: String) {
+fun makePhoneCall(context: Context, phoneNumber: String) {
     try {
         val intent = Intent(Intent.ACTION_CALL).apply {
             data = "tel:$phoneNumber".toUri()

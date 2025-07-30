@@ -17,4 +17,6 @@
     <string name="no_call_app">No app found to make a phone call</string>
     <string name="call_failed">Failed to initiate call: %s</string>
     <string name="something_went_wrong">Something went wrong!</string>
+    <string name="offline_message">Offline mode enabled</string>
+    <string name="dismiss">Dismiss</string>
 </resources>
