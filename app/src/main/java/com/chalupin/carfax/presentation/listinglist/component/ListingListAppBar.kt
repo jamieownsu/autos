@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -64,6 +65,6 @@ fun ListingListAppBar(isOffline: Boolean, snackBarHostState: SnackbarHostState) 
 @Composable
 fun PreviewListingListAppBar() {
     MaterialTheme {
-        ListingListAppBar(isOffline = true, snackBarHostState = SnackbarHostState())
+        ListingListAppBar(isOffline = true, snackBarHostState = remember { SnackbarHostState() })
     }
 }
