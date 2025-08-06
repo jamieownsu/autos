@@ -40,10 +40,6 @@ fun ListingDto.toDomain(): Listing {
     )
 }
 
-fun List<ListingDto>.toDomainList(): List<Listing> {
-    return map { it.toDomain() }
-}
-
 fun DealerDto.toEntity(): DealerEntity {
     return DealerEntity(
         city = this.city, state = this.state, phone = this.phone
@@ -96,8 +92,4 @@ fun ListingEntity.toDomainFromEntity(): Listing {
         bodyType = this.bodyType,
         vin = this.vin,
     )
-}
-
-fun List<ListingEntity>.toDomainListFromEntity(): List<Listing> {
-    return map { it.toDomainFromEntity() }
 }

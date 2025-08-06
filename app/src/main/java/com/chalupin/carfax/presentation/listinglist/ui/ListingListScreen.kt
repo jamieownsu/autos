@@ -7,14 +7,15 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.chalupin.carfax.presentation.listinglist.component.ListingListAppBar
 import com.chalupin.carfax.presentation.listinglist.component.ListingsListColumn
 import com.chalupin.carfax.presentation.listinglist.util.ListingsEvent
+import com.chalupin.carfax.presentation.listinglist.util.ListingsState
 import com.chalupin.carfax.presentation.listinglist.viewmodel.ListingListViewModel
 import com.chalupin.carfax.presentation.shared.ErrorScreen
 import com.chalupin.carfax.presentation.shared.LoadingScreen
@@ -28,11 +29,8 @@ fun ListingListScreen(
     val snackBarHostState = remember { SnackbarHostState() }
     val pullToRefreshState = rememberPullToRefreshState()
 
-    val listings by viewModel.listings.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
-    val error by viewModel.error.collectAsState()
-    val isOffline by viewModel.isOffline.collectAsState()
-
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isOffline = (uiState as? ListingsState.Success)?.isOffline ?: false
     Scaffold(
         topBar = {
             ListingListAppBar(isOffline, snackBarHostState)
@@ -42,20 +40,22 @@ fun ListingListScreen(
         },
     ) { innerPadding ->
         PullToRefreshBox(
-            isRefreshing = isLoading,
+            isRefreshing = uiState is ListingsState.Loading,
             onRefresh = { viewModel.handleEvent(ListingsEvent.LoadListingsEvent) },
             state = pullToRefreshState,
             content = {
-                if (isLoading) {
-                    LoadingScreen(innerPadding)
-                } else if (error != null) {
-                    ErrorScreen(innerPadding)
-                } else {
-                    ListingsListColumn(
-                        innerPadding,
-                        navController,
-                        listings
-                    )
+                when (uiState) {
+                    is ListingsState.Loading -> LoadingScreen(innerPadding)
+                    is ListingsState.Success -> {
+                        val listings = (uiState as ListingsState.Success).listings
+                        ListingsListColumn(
+                            innerPadding,
+                            navController,
+                            listings
+                        )
+                    }
+
+                    is ListingsState.Error -> ErrorScreen(innerPadding)
                 }
             })
     }

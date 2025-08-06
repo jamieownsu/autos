@@ -10,14 +10,20 @@ import com.chalupin.carfax.TestActivity
 import com.chalupin.carfax.domain.model.Dealer
 import com.chalupin.carfax.domain.model.Images
 import com.chalupin.carfax.domain.model.Listing
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 class VehicleDetailsRowTest {
 
-    @get:Rule
+    @get:Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
     val composeTestRule = createAndroidComposeRule<TestActivity>()
 
     private fun createTestListing(): Listing {

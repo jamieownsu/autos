@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.chalupin.carfax.data.db.entity.ListingEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ListingDao {
@@ -13,7 +12,7 @@ interface ListingDao {
     suspend fun insertListings(listings: List<ListingEntity>)
 
     @Query("SELECT * FROM listings")
-    fun getAllListings(): Flow<List<ListingEntity>>
+    suspend fun getAllListings(): List<ListingEntity>
 
     @Query("DELETE FROM listings")
     suspend fun deleteAllListings()

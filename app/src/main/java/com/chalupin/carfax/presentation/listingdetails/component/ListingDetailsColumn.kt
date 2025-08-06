@@ -46,7 +46,7 @@ fun ListingDetailsColumn(listing: Listing) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .size(300.dp),
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.FillWidth,
                 placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
                 error = painterResource(R.drawable.ic_launcher_foreground),
             )
