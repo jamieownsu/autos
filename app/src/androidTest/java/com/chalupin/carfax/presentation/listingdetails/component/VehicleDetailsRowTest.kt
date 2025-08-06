@@ -7,9 +7,9 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.chalupin.carfax.R
 import com.chalupin.carfax.TestActivity
-import com.chalupin.carfax.domain.model.Dealer
-import com.chalupin.carfax.domain.model.Images
-import com.chalupin.carfax.domain.model.Listing
+import com.chalupin.carfax.domain.entity.Dealer
+import com.chalupin.carfax.domain.entity.Images
+import com.chalupin.carfax.domain.entity.Listing
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule

@@ -1,4 +1,4 @@
-package com.chalupin.carfax.domain.model
+package com.chalupin.carfax.domain.entity
 
 data class Listing(
     val dealer: Dealer,

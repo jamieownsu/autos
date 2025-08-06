@@ -1,6 +1,6 @@
 package com.chalupin.carfax.domain.usecase
 
-import com.chalupin.carfax.domain.model.Listing
+import com.chalupin.carfax.domain.entity.Listing
 import com.chalupin.carfax.domain.repository.ListingRepository
 import com.chalupin.carfax.domain.util.ListingDetailsResponse
 import kotlinx.coroutines.CoroutineDispatcher

@@ -2,9 +2,9 @@ package com.chalupin.carfax.data.api.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ListingDto(
+data class ListingModel(
     @SerializedName("dealer")
-    val dealer: DealerDto,
+    val dealer: DealerModel,
     @SerializedName("vin")
     val vin: String,
     @SerializedName("year")
@@ -20,7 +20,7 @@ data class ListingDto(
     @SerializedName("imageCount")
     val imageCount: Int,
     @SerializedName("images")
-    val images: ImagesDto?,
+    val images: ImagesModel?,
     @SerializedName("exteriorColor")
     val exteriorColor: String,
     @SerializedName("interiorColor")

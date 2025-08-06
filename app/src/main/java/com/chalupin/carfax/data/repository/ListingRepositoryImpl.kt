@@ -5,7 +5,7 @@ import com.chalupin.carfax.data.db.dao.ListingDao
 import com.chalupin.carfax.data.mapper.toDomain
 import com.chalupin.carfax.data.mapper.toDomainFromEntity
 import com.chalupin.carfax.data.mapper.toEntity
-import com.chalupin.carfax.domain.model.Listing
+import com.chalupin.carfax.domain.entity.Listing
 import com.chalupin.carfax.domain.repository.ListingRepository
 import com.chalupin.carfax.domain.util.ListingDetailsResponse
 import com.chalupin.carfax.domain.util.ListingsResponse

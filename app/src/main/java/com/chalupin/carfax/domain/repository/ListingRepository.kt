@@ -1,6 +1,6 @@
 package com.chalupin.carfax.domain.repository
 
-import com.chalupin.carfax.domain.model.Listing
+import com.chalupin.carfax.domain.entity.Listing
 import com.chalupin.carfax.domain.util.ListingDetailsResponse
 import com.chalupin.carfax.domain.util.ListingsResponse
 

@@ -1,6 +1,6 @@
 package com.chalupin.carfax.presentation.listingdetails.util
 
-import com.chalupin.carfax.domain.model.Listing
+import com.chalupin.carfax.domain.entity.Listing
 
 sealed class ListingDetailsState {
     object Loading : ListingDetailsState()
