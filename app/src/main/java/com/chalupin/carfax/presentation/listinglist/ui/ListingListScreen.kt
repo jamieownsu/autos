@@ -44,14 +44,13 @@ fun ListingListScreen(
             onRefresh = { viewModel.handleEvent(ListingsEvent.LoadListingsEvent) },
             state = pullToRefreshState,
             content = {
-                when (uiState) {
+                when (val state = uiState) {
                     is ListingsState.Loading -> LoadingScreen(innerPadding)
                     is ListingsState.Success -> {
-                        val listings = (uiState as ListingsState.Success).listings
                         ListingsListColumn(
                             innerPadding,
                             navController,
-                            listings
+                            state.listings
                         )
                     }
 
