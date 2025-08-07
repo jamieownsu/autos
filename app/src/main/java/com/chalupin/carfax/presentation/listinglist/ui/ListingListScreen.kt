@@ -12,7 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.chalupin.carfax.presentation.listinglist.component.ListingListAppBar
+import com.chalupin.carfax.presentation.listinglist.component.ListingsListAppBar
 import com.chalupin.carfax.presentation.listinglist.component.ListingsListColumn
 import com.chalupin.carfax.presentation.listinglist.util.ListingsEvent
 import com.chalupin.carfax.presentation.listinglist.util.ListingsState
@@ -34,7 +34,7 @@ fun ListingListScreen(
 
     Scaffold(
         topBar = {
-            ListingListAppBar(isOffline, snackBarHostState)
+            ListingsListAppBar(isOffline, snackBarHostState)
         },
         snackbarHost = {
             SnackbarHost(hostState = snackBarHostState)

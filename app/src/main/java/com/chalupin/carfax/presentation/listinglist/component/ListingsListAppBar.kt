@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListingListAppBar(isOffline: Boolean, snackBarHostState: SnackbarHostState) {
+fun ListingsListAppBar(isOffline: Boolean, snackBarHostState: SnackbarHostState) {
     val scope = rememberCoroutineScope()
 
     TopAppBar(
@@ -65,6 +65,6 @@ fun ListingListAppBar(isOffline: Boolean, snackBarHostState: SnackbarHostState) 
 @Composable
 fun PreviewListingListAppBar() {
     MaterialTheme {
-        ListingListAppBar(isOffline = true, snackBarHostState = remember { SnackbarHostState() })
+        ListingsListAppBar(isOffline = true, snackBarHostState = remember { SnackbarHostState() })
     }
 }
