@@ -35,8 +35,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlinOptions {}
-
     kotlin {
         jvmToolchain(21)
     }
@@ -45,7 +43,6 @@ android {
         compose = true
     }
 
-    composeOptions {}
 }
 
 dependencies {
