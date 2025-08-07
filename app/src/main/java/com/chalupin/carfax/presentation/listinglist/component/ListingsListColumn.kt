@@ -1,6 +1,5 @@
 package com.chalupin.carfax.presentation.listinglist.component
 
-import NavRoutes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.chalupin.carfax.core.navigation.NavRoutes
 import com.chalupin.carfax.domain.entity.Dealer
 import com.chalupin.carfax.domain.entity.Images
 import com.chalupin.carfax.domain.entity.Listing

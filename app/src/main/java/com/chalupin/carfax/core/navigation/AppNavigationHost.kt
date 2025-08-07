@@ -7,15 +7,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.chalupin.carfax.core.navigation.NavRoutes
 import com.chalupin.carfax.presentation.listingdetails.ui.ListingDetailScreen
 import com.chalupin.carfax.presentation.listinglist.ui.ListingListScreen
 
-
-object NavRoutes {
-    const val LISTING_LIST = "listing_list_screen"
-    const val LISTING_DETAIL = "listing_detail_screen"
-    const val LISTING_VIN_ARG = "listing_vin"
-}
 
 @Composable
 fun AppNavigationHost(navController: NavHostController) {

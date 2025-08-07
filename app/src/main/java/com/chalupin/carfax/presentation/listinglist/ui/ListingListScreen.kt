@@ -31,6 +31,7 @@ fun ListingListScreen(
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isOffline = (uiState as? ListingsState.Success)?.isOffline ?: false
+
     Scaffold(
         topBar = {
             ListingListAppBar(isOffline, snackBarHostState)
