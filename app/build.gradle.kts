@@ -7,17 +7,17 @@ plugins {
 }
 
 android {
-    namespace = "com.chalupin.carfax"
+    namespace = "com.chalupin.autos"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.chalupin.carfax"
+        applicationId = "com.chalupin.autos"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.chalupin.carfax.HiltTestRunner"
+        testInstrumentationRunner = "com.chalupin.autos.HiltTestRunner"
     }
 
     buildTypes {

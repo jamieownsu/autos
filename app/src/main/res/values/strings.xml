@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CarFax</string>
+    <string name="app_name">Autos</string>
     <string name="call_dealer">CALL DEALER</string>
     <string name="vehicle_info">Vehicle Info</string>
     <string name="location">Location</string>
