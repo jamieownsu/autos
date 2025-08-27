@@ -99,12 +99,7 @@ fun makePhoneCall(context: Context, phoneNumber: String) {
         val intent = Intent(Intent.ACTION_CALL).apply {
             data = "tel:$phoneNumber".toUri()
         }
-        if (intent.resolveActivity(context.packageManager) != null) {
-            context.startActivity(intent)
-        } else {
-            Toast.makeText(context, context.getString(R.string.no_call_app), Toast.LENGTH_LONG)
-                .show()
-        }
+        context.startActivity(intent)
     } catch (e: Exception) {
         if (e is SecurityException) {
             Log.e("CallDealerButton", "Permission error: ${e.message}", e)

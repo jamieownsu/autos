@@ -17,10 +17,10 @@ fun ListingDetailScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     Scaffold { innerPadding ->
-        when (uiState) {
+        when (val state = uiState) {
             is ListingDetailsState.Loading -> LoadingScreen(innerPadding)
             is ListingDetailsState.Success -> {
-                val listingDetails = (uiState as ListingDetailsState.Success).listingDetails
+                val listingDetails = state.listingDetails
                 ListingDetailsColumn(listingDetails)
             }
 

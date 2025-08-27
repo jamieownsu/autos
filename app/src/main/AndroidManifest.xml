@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarFax">
         <activity
-            android:name=".presentation.listinglist.ui.ListingListActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.CarFax">
             <intent-filter>

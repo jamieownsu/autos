@@ -7,5 +7,6 @@ data class DealerEntity(
     val city: String,
     @ColumnInfo(name = "dealer_state")
     val state: String,
+    @ColumnInfo(name = "dealer_phone")
     val phone: String
 )

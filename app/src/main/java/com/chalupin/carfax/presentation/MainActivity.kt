@@ -1,4 +1,4 @@
-package com.chalupin.carfax.presentation.listinglist.ui
+package com.chalupin.carfax.presentation
 
 import AppNavigationHost
 import android.os.Bundle
@@ -10,7 +10,7 @@ import com.chalupin.carfax.core.theme.CarFaxTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ListingListActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

@@ -5,10 +5,10 @@ import com.chalupin.carfax.data.db.dao.ListingDao
 import com.chalupin.carfax.data.mapper.toDomain
 import com.chalupin.carfax.data.mapper.toDomainFromEntity
 import com.chalupin.carfax.data.mapper.toEntity
+import com.chalupin.carfax.data.util.OfflineException
 import com.chalupin.carfax.domain.entity.Listing
 import com.chalupin.carfax.domain.repository.ListingRepository
 import com.chalupin.carfax.domain.util.ListingDetailsResponse
-import com.chalupin.carfax.domain.util.ListingsResponse
 import java.io.IOException
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ class ListingRepositoryImpl @Inject constructor(
     private val listingService: ListingService,
     private val listingDao: ListingDao
 ) : ListingRepository {
-    override suspend fun getListings(): ListingsResponse<List<Listing>> {
+    override suspend fun getListings(): List<Listing> {
         try {
             val carFaxDto = listingService.getListings()
             val listingDTOs = carFaxDto.listings
@@ -24,12 +24,12 @@ class ListingRepositoryImpl @Inject constructor(
             listingDao.deleteAllListings()
             listingDao.insertListings(entityListings)
             val domainListings = listingDTOs.map { it.toDomain() }
-            return ListingsResponse.Success(domainListings)
+            return domainListings
         } catch (_: IOException) {
             val listings = listingDao.getAllListings().map { it.toDomainFromEntity() }
-            return ListingsResponse.Offline(listings)
+            throw OfflineException(listings)
         } catch (e: Exception) {
-            return ListingsResponse.Error(e)
+            throw e
         }
     }
 
