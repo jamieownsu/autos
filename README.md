@@ -1,2 +1,2 @@
-# Carfax
+# Autos demo app
 
