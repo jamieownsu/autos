@@ -1,2 +1,2 @@
-# Autos demo app
+# autos demo app
 
