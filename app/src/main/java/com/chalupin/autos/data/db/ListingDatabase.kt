@@ -7,10 +7,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.chalupin.autos.data.db.converter.Converters
 import com.chalupin.autos.data.db.dao.ListingDao
-import com.chalupin.autos.data.db.entity.ListingEntity
+import com.chalupin.autos.data.db.model.ListingModel
 
 @Database(
-    entities = [ListingEntity::class],
+    entities = [ListingModel::class],
     version = 1,
     exportSchema = false
 )

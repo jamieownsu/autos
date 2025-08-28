@@ -1,25 +1,25 @@
 package com.chalupin.autos.data.mapper
 
-import com.chalupin.autos.data.api.model.DealerModel
-import com.chalupin.autos.data.api.model.ImagesModel
-import com.chalupin.autos.data.api.model.ListingModel
-import com.chalupin.autos.data.db.entity.DealerEntity
-import com.chalupin.autos.data.db.entity.ListingEntity
+import com.chalupin.autos.data.api.dto.DealerDto
+import com.chalupin.autos.data.api.dto.ImagesDto
+import com.chalupin.autos.data.api.dto.ListingDto
+import com.chalupin.autos.data.db.model.DealerModel
+import com.chalupin.autos.data.db.model.ListingModel
 import com.chalupin.autos.domain.entity.Dealer
 import com.chalupin.autos.domain.entity.Images
 import com.chalupin.autos.domain.entity.Listing
 
-fun DealerModel.toDomain(): Dealer {
+fun DealerDto.toDomain(): Dealer {
     return Dealer(
         city = this.city, state = this.state, phone = this.phone
     )
 }
 
-fun ImagesModel.toDomain(): Images {
+fun ImagesDto.toDomain(): Images {
     return Images(large = this.large)
 }
 
-fun ListingModel.toDomain(): Listing {
+fun ListingDto.toDomain(): Listing {
     return Listing(
         dealer = this.dealer.toDomain(),
         vin = this.vin,
@@ -40,14 +40,14 @@ fun ListingModel.toDomain(): Listing {
     )
 }
 
-fun DealerModel.toEntity(): DealerEntity {
-    return DealerEntity(
+fun DealerDto.toEntity(): DealerModel {
+    return DealerModel(
         city = this.city, state = this.state, phone = this.phone
     )
 }
 
-fun ListingModel.toEntity(): ListingEntity {
-    return ListingEntity(
+fun ListingDto.toEntity(): ListingModel {
+    return ListingModel(
         dealer = this.dealer.toEntity(),
         images = this.images?.large,
         year = this.year,
@@ -67,13 +67,13 @@ fun ListingModel.toEntity(): ListingEntity {
     )
 }
 
-fun DealerEntity.toDomain(): Dealer {
+fun DealerModel.toDomain(): Dealer {
     return Dealer(
         city = this.city, state = this.state, phone = this.phone
     )
 }
 
-fun ListingEntity.toDomainFromEntity(): Listing {
+fun ListingModel.toDomainFromEntity(): Listing {
     return Listing(
         dealer = this.dealer.toDomain(),
         images = Images(this.images),

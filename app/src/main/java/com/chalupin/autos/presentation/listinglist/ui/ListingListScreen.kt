@@ -27,9 +27,11 @@ fun ListingListScreen(
     viewModel: ListingListViewModel = hiltViewModel()
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
+
     val pullToRefreshState = rememberPullToRefreshState()
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     val isOffline = (uiState as? ListingsState.Success)?.isOffline ?: false
 
     Scaffold(

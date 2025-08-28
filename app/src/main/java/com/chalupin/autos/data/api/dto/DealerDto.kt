@@ -1,8 +1,8 @@
-package com.chalupin.autos.data.api.model
+package com.chalupin.autos.data.api.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class DealerModel(
+data class DealerDto(
     @SerializedName("city")
     val city: String,
     @SerializedName("state")

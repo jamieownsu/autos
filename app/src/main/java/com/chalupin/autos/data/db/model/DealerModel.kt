@@ -1,8 +1,8 @@
-package com.chalupin.autos.data.db.entity
+package com.chalupin.autos.data.db.model
 
 import androidx.room.ColumnInfo
 
-data class DealerEntity(
+data class DealerModel(
     @ColumnInfo(name = "dealer_city")
     val city: String,
     @ColumnInfo(name = "dealer_state")

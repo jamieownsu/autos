@@ -1,4 +1,4 @@
-package com.chalupin.autos.data.db.entity
+package com.chalupin.autos.data.db.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "listings")
-data class ListingEntity(
+data class ListingModel(
     @PrimaryKey
     @ColumnInfo(name = "vin")
     val vin: String,
@@ -19,7 +19,7 @@ data class ListingEntity(
     @ColumnInfo(name = "price")
     val currentPrice: Float,
     @Embedded(prefix = "dealer_")
-    val dealer: DealerEntity,
+    val dealer: DealerModel,
     @ColumnInfo(name = "images")
     val images: List<String>?,
     @ColumnInfo(name = "mileage")

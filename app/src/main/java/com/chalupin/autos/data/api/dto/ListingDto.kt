@@ -1,10 +1,10 @@
-package com.chalupin.autos.data.api.model
+package com.chalupin.autos.data.api.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class ListingModel(
+data class ListingDto(
     @SerializedName("dealer")
-    val dealer: DealerModel,
+    val dealer: DealerDto,
     @SerializedName("vin")
     val vin: String,
     @SerializedName("year")
@@ -20,7 +20,7 @@ data class ListingModel(
     @SerializedName("imageCount")
     val imageCount: Int,
     @SerializedName("images")
-    val images: ImagesModel?,
+    val images: ImagesDto?,
     @SerializedName("exteriorColor")
     val exteriorColor: String,
     @SerializedName("interiorColor")
