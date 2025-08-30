@@ -1,6 +1,6 @@
 package com.chalupin.autos.domain.usecase
 
-import com.chalupin.autos.domain.entity.Listing
+import com.chalupin.autos.domain.entity.ListingEntity
 import com.chalupin.autos.domain.repository.ListingRepository
 import com.chalupin.autos.domain.util.ListingDetailsResponse
 import kotlinx.coroutines.CoroutineDispatcher
@@ -12,7 +12,7 @@ class GetListingDetailsUseCase @Inject constructor(
     private val listingRepository: ListingRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend operator fun invoke(vin: String): ListingDetailsResponse<Listing> {
+    suspend operator fun invoke(vin: String): ListingDetailsResponse<ListingEntity> {
         return withContext(ioDispatcher) { listingRepository.getListingByVin(vin) }
     }
 }

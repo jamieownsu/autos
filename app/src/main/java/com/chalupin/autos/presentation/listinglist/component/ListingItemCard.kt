@@ -24,26 +24,26 @@ import coil.compose.AsyncImage
 import com.chalupin.autos.R
 import com.chalupin.autos.core.util.formatMileage
 import com.chalupin.autos.core.util.formatPrice
-import com.chalupin.autos.domain.entity.Dealer
-import com.chalupin.autos.domain.entity.Images
-import com.chalupin.autos.domain.entity.Listing
+import com.chalupin.autos.domain.entity.DealerEntity
+import com.chalupin.autos.domain.entity.ImagesEntity
+import com.chalupin.autos.domain.entity.ListingEntity
 import com.chalupin.autos.presentation.shared.CallDealerButton
 
 @Composable
-fun ListingItemCard(listing: Listing, onItemClick: (String) -> Unit) {
+fun ListingItemCard(listingEntity: ListingEntity, onItemClick: (String) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
-            .clickable { onItemClick(listing.vin) },
+            .clickable { onItemClick(listingEntity.vin) },
         elevation = CardDefaults.cardElevation(
             defaultElevation = 8.dp
         )
     ) {
         Column {
             AsyncImage(
-                model = listing.getCoverImage(),
-                contentDescription = "Image of ${listing.make} ${listing.model}",
+                model = listingEntity.getCoverImage(),
+                contentDescription = "Image of ${listingEntity.make} ${listingEntity.model}",
                 modifier = Modifier
                     .fillMaxWidth()
                     .size(200.dp),
@@ -58,9 +58,9 @@ fun ListingItemCard(listing: Listing, onItemClick: (String) -> Unit) {
                 Text(
                     stringResource(
                         id = R.string.year_make_model,
-                        listing.year,
-                        listing.make,
-                        listing.model
+                        listingEntity.year,
+                        listingEntity.make,
+                        listingEntity.model
                     ),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
@@ -68,14 +68,14 @@ fun ListingItemCard(listing: Listing, onItemClick: (String) -> Unit) {
                 Text(
                     stringResource(
                         id = R.string.price_mileage,
-                        formatPrice(listing.currentPrice),
-                        formatMileage(listing.mileage),
+                        formatPrice(listingEntity.currentPrice),
+                        formatMileage(listingEntity.mileage),
                     ),
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Text(
                     stringResource(
-                        id = R.string.city_state, listing.dealer.city, listing.dealer.state
+                        id = R.string.city_state, listingEntity.dealerEntity.city, listingEntity.dealerEntity.state
                     ),
                     style = MaterialTheme.typography.bodyMedium
                 )
@@ -84,7 +84,7 @@ fun ListingItemCard(listing: Listing, onItemClick: (String) -> Unit) {
                     thickness = 2.dp,
                     color = Color.LightGray
                 )
-                CallDealerButton(phoneNumber = listing.dealer.phone)
+                CallDealerButton(phoneNumber = listingEntity.dealerEntity.phone)
             }
         }
     }
@@ -93,8 +93,8 @@ fun ListingItemCard(listing: Listing, onItemClick: (String) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewListingItemCard() {
-    val listing = Listing(
-        dealer = Dealer(city = "City", state = "State", phone = "555-555-5555"),
+    val listingEntity = ListingEntity(
+        dealerEntity = DealerEntity(city = "City", state = "State", phone = "555-555-5555"),
         vin = "vin",
         year = 2000,
         make = "",
@@ -102,7 +102,7 @@ fun PreviewListingItemCard() {
         mileage = 10000,
         currentPrice = 9999F,
         imageCount = 3,
-        images = Images(large = emptyList()),
+        imagesEntity = ImagesEntity(large = emptyList()),
         exteriorColor = "",
         interiorColor = "",
         engine = "",
@@ -113,7 +113,7 @@ fun PreviewListingItemCard() {
     )
     MaterialTheme {
         ListingItemCard(
-            listing,
+            listingEntity,
             onItemClick = {}
         )
     }

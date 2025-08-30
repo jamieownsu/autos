@@ -53,7 +53,7 @@ fun ListingListScreen(
                         ListingsListColumn(
                             innerPadding,
                             navController,
-                            state.listings
+                            state.listingEntities
                         )
                     }
 

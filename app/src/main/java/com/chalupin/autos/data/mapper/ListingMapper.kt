@@ -5,23 +5,23 @@ import com.chalupin.autos.data.api.dto.ImagesDto
 import com.chalupin.autos.data.api.dto.ListingDto
 import com.chalupin.autos.data.db.model.DealerModel
 import com.chalupin.autos.data.db.model.ListingModel
-import com.chalupin.autos.domain.entity.Dealer
-import com.chalupin.autos.domain.entity.Images
-import com.chalupin.autos.domain.entity.Listing
+import com.chalupin.autos.domain.entity.DealerEntity
+import com.chalupin.autos.domain.entity.ImagesEntity
+import com.chalupin.autos.domain.entity.ListingEntity
 
-fun DealerDto.toDomain(): Dealer {
-    return Dealer(
+fun DealerDto.toDomain(): DealerEntity {
+    return DealerEntity(
         city = this.city, state = this.state, phone = this.phone
     )
 }
 
-fun ImagesDto.toDomain(): Images {
-    return Images(large = this.large)
+fun ImagesDto.toDomain(): ImagesEntity {
+    return ImagesEntity(large = this.large)
 }
 
-fun ListingDto.toDomain(): Listing {
-    return Listing(
-        dealer = this.dealer.toDomain(),
+fun ListingDto.toDomain(): ListingEntity {
+    return ListingEntity(
+        dealerEntity = this.dealer.toDomain(),
         vin = this.vin,
         year = this.year,
         make = this.make,
@@ -29,7 +29,7 @@ fun ListingDto.toDomain(): Listing {
         mileage = this.mileage,
         currentPrice = this.currentPrice,
         imageCount = this.imageCount,
-        images = this.images?.toDomain(),
+        imagesEntity = this.images?.toDomain(),
         exteriorColor = this.exteriorColor,
         interiorColor = this.interiorColor,
         engine = this.engine,
@@ -67,16 +67,16 @@ fun ListingDto.toEntity(): ListingModel {
     )
 }
 
-fun DealerModel.toDomain(): Dealer {
-    return Dealer(
+fun DealerModel.toDomain(): DealerEntity {
+    return DealerEntity(
         city = this.city, state = this.state, phone = this.phone
     )
 }
 
-fun ListingModel.toDomainFromEntity(): Listing {
-    return Listing(
-        dealer = this.dealer.toDomain(),
-        images = Images(this.images),
+fun ListingModel.toDomainFromEntity(): ListingEntity {
+    return ListingEntity(
+        dealerEntity = this.dealer.toDomain(),
+        imagesEntity = ImagesEntity(this.images),
         year = this.year,
         make = this.make,
         model = this.model,

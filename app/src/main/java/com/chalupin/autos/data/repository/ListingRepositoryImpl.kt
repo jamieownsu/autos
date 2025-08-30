@@ -6,7 +6,7 @@ import com.chalupin.autos.data.mapper.toDomain
 import com.chalupin.autos.data.mapper.toDomainFromEntity
 import com.chalupin.autos.data.mapper.toEntity
 import com.chalupin.autos.data.util.OfflineException
-import com.chalupin.autos.domain.entity.Listing
+import com.chalupin.autos.domain.entity.ListingEntity
 import com.chalupin.autos.domain.repository.ListingRepository
 import com.chalupin.autos.domain.util.ListingDetailsResponse
 import java.io.IOException
@@ -16,7 +16,7 @@ class ListingRepositoryImpl @Inject constructor(
     private val listingService: ListingService,
     private val listingDao: ListingDao
 ) : ListingRepository {
-    override suspend fun getListings(): List<Listing> {
+    override suspend fun getListings(): List<ListingEntity> {
         try {
             val carFaxDto = listingService.getListings()
             val listingDTOs = carFaxDto.listings
@@ -33,7 +33,7 @@ class ListingRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getListingByVin(vin: String): ListingDetailsResponse<Listing> {
+    override suspend fun getListingByVin(vin: String): ListingDetailsResponse<ListingEntity> {
         try {
             val listings = listingDao.getAllListings().map { it.toDomainFromEntity() }
             val listing = listings.find { it.vin == vin }

@@ -20,7 +20,7 @@ fun ListingDetailScreen(
         when (val state = uiState) {
             is ListingDetailsState.Loading -> LoadingScreen(innerPadding)
             is ListingDetailsState.Success -> {
-                val listingDetails = state.listingDetails
+                val listingDetails = state.listingEntityDetails
                 ListingDetailsColumn(listingDetails)
             }
 

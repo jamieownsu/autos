@@ -1,7 +1,7 @@
 package com.chalupin.autos.domain.entity
 
-data class Listing(
-    val dealer: Dealer,
+data class ListingEntity(
+    val dealerEntity: DealerEntity,
     val vin: String,
     val year: Int,
     val make: String,
@@ -9,7 +9,7 @@ data class Listing(
     val mileage: Int,
     val currentPrice: Float,
     val imageCount: Int,
-    val images: Images?,
+    val imagesEntity: ImagesEntity?,
     val exteriorColor: String,
     val interiorColor: String,
     val engine: String,
@@ -19,15 +19,15 @@ data class Listing(
     val bodyType: String,
 ) {
     fun getCoverImage(): String? {
-        if (images?.large?.isNotEmpty() == true) {
-            return images.large.first()
+        if (imagesEntity?.large?.isNotEmpty() == true) {
+            return imagesEntity.large.first()
         }
         return null
     }
 
     fun getImages(): List<String>? {
-        if (images?.large?.isNotEmpty() == true) {
-            return images.large
+        if (imagesEntity?.large?.isNotEmpty() == true) {
+            return imagesEntity.large
         }
         return null
     }

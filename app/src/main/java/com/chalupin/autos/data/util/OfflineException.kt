@@ -1,5 +1,5 @@
 package com.chalupin.autos.data.util
 
-import com.chalupin.autos.domain.entity.Listing
+import com.chalupin.autos.domain.entity.ListingEntity
 
-class OfflineException(val listings: List<Listing>) : Exception()
+class OfflineException(val listingEntities: List<ListingEntity>) : Exception()

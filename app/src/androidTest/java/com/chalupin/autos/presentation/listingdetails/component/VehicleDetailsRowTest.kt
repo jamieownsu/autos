@@ -7,9 +7,9 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.chalupin.autos.R
 import com.chalupin.autos.TestActivity
-import com.chalupin.autos.domain.entity.Dealer
-import com.chalupin.autos.domain.entity.Images
-import com.chalupin.autos.domain.entity.Listing
+import com.chalupin.autos.domain.entity.DealerEntity
+import com.chalupin.autos.domain.entity.ImagesEntity
+import com.chalupin.autos.domain.entity.ListingEntity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
@@ -26,9 +26,9 @@ class VehicleDetailsRowTest {
     @get:Rule(order = 1)
     val composeTestRule = createAndroidComposeRule<TestActivity>()
 
-    private fun createTestListing(): Listing {
-        return Listing(
-            dealer = Dealer(city = "TestCity", state = "TS", phone = "123-456-7890"),
+    private fun createTestListing(): ListingEntity {
+        return ListingEntity(
+            dealerEntity = DealerEntity(city = "TestCity", state = "TS", phone = "123-456-7890"),
             vin = "TESTVIN123",
             year = 2020,
             make = "TestMake",
@@ -36,7 +36,7 @@ class VehicleDetailsRowTest {
             mileage = 50000,
             currentPrice = 25000F,
             imageCount = 1,
-            images = Images(large = emptyList()),
+            imagesEntity = ImagesEntity(large = emptyList()),
             exteriorColor = "TestExterior",
             interiorColor = "TestInterior",
             engine = "TestEngine",
@@ -53,7 +53,7 @@ class VehicleDetailsRowTest {
 
         composeTestRule.setContent {
             MaterialTheme {
-                VehicleDetailsRow(listing = listing)
+                VehicleDetailsRow(listingEntity = listing)
             }
         }
 
@@ -80,8 +80,8 @@ class VehicleDetailsRowTest {
         composeTestRule.onNodeWithText(
             composeTestRule.activity.getString(
                 R.string.city_state,
-                listing.dealer.city,
-                listing.dealer.state
+                listing.dealerEntity.city,
+                listing.dealerEntity.state
             )
         ).assertIsDisplayed()
         composeTestRule.onNodeWithText(listing.exteriorColor).assertIsDisplayed()
@@ -96,12 +96,12 @@ class VehicleDetailsRowTest {
     @Test
     fun vehicleDetailsRow_displaysCorrectCityAndStateFormat() {
         val listing = createTestListing().copy(
-            dealer = Dealer(city = "AnotherCity", state = "AS", phone = "111-222-3333")
+            dealerEntity = DealerEntity(city = "AnotherCity", state = "AS", phone = "111-222-3333")
         )
 
         composeTestRule.setContent {
             MaterialTheme {
-                VehicleDetailsRow(listing = listing)
+                VehicleDetailsRow(listingEntity = listing)
             }
         }
 

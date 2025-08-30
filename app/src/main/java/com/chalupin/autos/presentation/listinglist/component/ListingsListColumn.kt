@@ -13,15 +13,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.chalupin.autos.core.navigation.NavRoutes
-import com.chalupin.autos.domain.entity.Dealer
-import com.chalupin.autos.domain.entity.Images
-import com.chalupin.autos.domain.entity.Listing
+import com.chalupin.autos.domain.entity.DealerEntity
+import com.chalupin.autos.domain.entity.ImagesEntity
+import com.chalupin.autos.domain.entity.ListingEntity
 
 @Composable
 fun ListingsListColumn(
     innerPadding: PaddingValues,
     navController: NavController,
-    listings: List<Listing>
+    listingEntities: List<ListingEntity>
 ) {
     LazyColumn(
         modifier = Modifier
@@ -30,9 +30,9 @@ fun ListingsListColumn(
             .padding(vertical = 16.dp, horizontal = 8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(listings) { listing ->
+        items(listingEntities) { listing ->
             ListingItemCard(
-                listing = listing,
+                listingEntity = listing,
                 onItemClick = { vin ->
                     navController.navigate("${NavRoutes.LISTING_DETAIL}/$vin")
                 })
@@ -44,8 +44,8 @@ fun ListingsListColumn(
 @Composable
 fun ListingsListColumnPreview() {
     val mockNavController = rememberNavController()
-    val listing = Listing(
-        dealer = Dealer(city = "City", state = "State", phone = "555-555-5555"),
+    val listingEntity = ListingEntity(
+        dealerEntity = DealerEntity(city = "City", state = "State", phone = "555-555-5555"),
         vin = "vin",
         year = 2000,
         make = "",
@@ -53,7 +53,7 @@ fun ListingsListColumnPreview() {
         mileage = 10000,
         currentPrice = 9999F,
         imageCount = 3,
-        images = Images(large = emptyList()),
+        imagesEntity = ImagesEntity(large = emptyList()),
         exteriorColor = "",
         interiorColor = "",
         engine = "",
@@ -63,11 +63,11 @@ fun ListingsListColumnPreview() {
         bodyType = ""
     )
     val sampleListings = listOf(
-        listing
+        listingEntity
     )
     ListingsListColumn(
         innerPadding = PaddingValues(16.dp),
         navController = mockNavController,
-        listings = sampleListings
+        listingEntities = sampleListings
     )
 }

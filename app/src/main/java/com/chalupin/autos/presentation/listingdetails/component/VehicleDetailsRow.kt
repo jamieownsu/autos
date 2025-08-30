@@ -16,12 +16,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.chalupin.autos.R
-import com.chalupin.autos.domain.entity.Dealer
-import com.chalupin.autos.domain.entity.Images
-import com.chalupin.autos.domain.entity.Listing
+import com.chalupin.autos.domain.entity.DealerEntity
+import com.chalupin.autos.domain.entity.ImagesEntity
+import com.chalupin.autos.domain.entity.ListingEntity
 
 @Composable
-fun VehicleDetailsRow(listing: Listing) {
+fun VehicleDetailsRow(listingEntity: ListingEntity) {
     Column(
         modifier = Modifier.padding(horizontal = 32.dp),
     ) {
@@ -78,37 +78,37 @@ fun VehicleDetailsRow(listing: Listing) {
                 Text(
                     stringResource(
                         id = R.string.city_state,
-                        listing.dealer.city,
-                        listing.dealer.state
+                        listingEntity.dealerEntity.city,
+                        listingEntity.dealerEntity.state
                     ),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    listing.exteriorColor,
+                    listingEntity.exteriorColor,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    listing.interiorColor,
+                    listingEntity.interiorColor,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    listing.driveType,
+                    listingEntity.driveType,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    listing.transmission,
+                    listingEntity.transmission,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    listing.bodyType,
+                    listingEntity.bodyType,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    listing.engine,
+                    listingEntity.engine,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    listing.fuel,
+                    listingEntity.fuel,
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -119,8 +119,8 @@ fun VehicleDetailsRow(listing: Listing) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewVehicleDetailsRow() {
-    val listing = Listing(
-        dealer = Dealer(city = "City", state = "State", phone = "555-555-5555"),
+    val listingEntity = ListingEntity(
+        dealerEntity = DealerEntity(city = "City", state = "State", phone = "555-555-5555"),
         vin = "vin",
         year = 2000,
         make = "",
@@ -128,7 +128,7 @@ fun PreviewVehicleDetailsRow() {
         mileage = 10000,
         currentPrice = 9999F,
         imageCount = 3,
-        images = Images(large = emptyList()),
+        imagesEntity = ImagesEntity(large = emptyList()),
         exteriorColor = "",
         interiorColor = "",
         engine = "",
@@ -139,7 +139,7 @@ fun PreviewVehicleDetailsRow() {
     )
     MaterialTheme {
         VehicleDetailsRow(
-            listing
+            listingEntity
         )
     }
 }

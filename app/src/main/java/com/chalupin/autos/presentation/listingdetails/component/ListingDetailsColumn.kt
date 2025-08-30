@@ -26,14 +26,14 @@ import coil.compose.AsyncImage
 import com.chalupin.autos.R
 import com.chalupin.autos.core.util.formatMileage
 import com.chalupin.autos.core.util.formatPrice
-import com.chalupin.autos.domain.entity.Dealer
-import com.chalupin.autos.domain.entity.Images
-import com.chalupin.autos.domain.entity.Listing
+import com.chalupin.autos.domain.entity.DealerEntity
+import com.chalupin.autos.domain.entity.ImagesEntity
+import com.chalupin.autos.domain.entity.ListingEntity
 import com.chalupin.autos.presentation.shared.CallDealerButton
 
 @Composable
-fun ListingDetailsColumn(listing: Listing) {
-    val imageCount = listing.images?.large?.size ?: 1
+fun ListingDetailsColumn(listingEntity: ListingEntity) {
+    val imageCount = listingEntity.imagesEntity?.large?.size ?: 1
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { imageCount })
     Column(
         modifier = Modifier.fillMaxSize()
@@ -42,8 +42,8 @@ fun ListingDetailsColumn(listing: Listing) {
             state = pagerState,
         ) { page ->
             AsyncImage(
-                model = listing.getImages()?.get(page),
-                contentDescription = "Image of ${listing.make} ${listing.model}",
+                model = listingEntity.getImages()?.get(page),
+                contentDescription = "Image of ${listingEntity.make} ${listingEntity.model}",
                 modifier = Modifier
                     .fillMaxWidth()
                     .size(300.dp),
@@ -59,9 +59,9 @@ fun ListingDetailsColumn(listing: Listing) {
             Text(
                 text = stringResource(
                     id = R.string.year_make_model,
-                    listing.year,
-                    listing.make,
-                    listing.model
+                    listingEntity.year,
+                    listingEntity.make,
+                    listingEntity.model
                 ),
                 style = MaterialTheme.typography.titleMedium,
                 fontSize = 20.sp,
@@ -70,8 +70,8 @@ fun ListingDetailsColumn(listing: Listing) {
             Text(
                 text = stringResource(
                     id = R.string.price_mileage,
-                    formatPrice(listing.currentPrice),
-                    formatMileage(listing.mileage),
+                    formatPrice(listingEntity.currentPrice),
+                    formatMileage(listingEntity.mileage),
                 ),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold
@@ -82,7 +82,7 @@ fun ListingDetailsColumn(listing: Listing) {
             thickness = 1.dp,
             color = Color.LightGray
         )
-        VehicleDetailsRow(listing)
+        VehicleDetailsRow(listingEntity)
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 32.dp),
             thickness = 2.dp,
@@ -92,7 +92,7 @@ fun ListingDetailsColumn(listing: Listing) {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CallDealerButton(listing.dealer.phone, isDetailsScreen = true)
+            CallDealerButton(listingEntity.dealerEntity.phone, isDetailsScreen = true)
         }
     }
 }
@@ -100,8 +100,8 @@ fun ListingDetailsColumn(listing: Listing) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewListingDetailsColumn() {
-    val listing = Listing(
-        dealer = Dealer(city = "City", state = "State", phone = "555-555-5555"),
+    val listingEntity = ListingEntity(
+        dealerEntity = DealerEntity(city = "City", state = "State", phone = "555-555-5555"),
         vin = "vin",
         year = 2000,
         make = "",
@@ -109,7 +109,7 @@ fun PreviewListingDetailsColumn() {
         mileage = 10000,
         currentPrice = 9999F,
         imageCount = 3,
-        images = Images(large = emptyList()),
+        imagesEntity = ImagesEntity(large = emptyList()),
         exteriorColor = "",
         interiorColor = "",
         engine = "",
@@ -120,7 +120,7 @@ fun PreviewListingDetailsColumn() {
     )
     MaterialTheme {
         ListingDetailsColumn(
-            listing
+            listingEntity
         )
     }
 }
